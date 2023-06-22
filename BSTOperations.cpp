@@ -373,7 +373,7 @@ node* LeftRotation(node* n)
     return x;
 }
 
-node* AVLInsertion(node* root,int val)
+node* AVLInsertion(node* &root,int val)
 {
     node* n = new node(val);
     if(root == NULL)
@@ -440,7 +440,8 @@ int main()
                 int val;
                 cout << "Enter the value to insert into BST: ";
                 cin >> val;
-                AVL = AVLInsertion(AVL,val);
+                // AVL = AVLInsertion(AVL,val);
+                InsertRecursive(root,val);
                 cout << "\n";
                 break;
 
@@ -475,14 +476,14 @@ int main()
                 
             case 4:
                 print2D(AVL,0);
-                // cout << "Inorder: ";InOrder(root);
-                // cout << "\n";
-                // cout << "Preorder: ";PreOrder(root);
-                // cout << "\n";
-                // cout << "Postorder: "; PostOrder(root);
-                // cout<< "\n";
-                // cout << "Breath First Search: "; BearthFrstSearch(root);
-                // cout<< "\n";
+                cout << "Inorder: ";InOrder(root);
+                cout << "\n";
+                cout << "Preorder: ";PreOrder(root);
+                cout << "\n";
+                cout << "Postorder: "; PostOrder(root);
+                cout<< "\n";
+                cout << "Breath First Search: "; BearthFrstSearch(root);
+                cout<< "\n";
                 break;
             case 5:
                 system("cls");
