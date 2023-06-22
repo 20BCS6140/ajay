@@ -377,7 +377,11 @@ node* AVLInsertion(node* &root,int val)
 {
     node* n = new node(val);
     if(root == NULL)
-        return root;
+    {
+    	root = n;
+    	return root;
+	}
+        
     else if(val < root->data)
         root->left = AVLInsertion(root->left,val);
     else if(val > root->data)
@@ -440,8 +444,8 @@ int main()
                 int val;
                 cout << "Enter the value to insert into BST: ";
                 cin >> val;
-                // AVL = AVLInsertion(AVL,val);
-                InsertRecursive(root,val);
+                AVL = AVLInsertion(root,val);
+//                InsertIterative(root,val);
                 cout << "\n";
                 break;
 
