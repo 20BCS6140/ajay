@@ -341,9 +341,77 @@ void print2D(node* root, int space)
     print2D(root->left, space);
 }
 
+
+int GetBalancedFcator(node* n)
+{
+    if(n == NULL)
+        return -1;
+    else
+        return (height(n->left)-height(n->right));
+}
+
+node* RightRotation(node* n)
+{
+    node* x = n->left;
+    node* t2 = x->right;
+
+    //rotate
+    x->right = n;
+    n->left = t2;
+    return x;
+}
+
+node* LeftRotation(node* n)
+{
+    node* x = n->right;
+    node* t2 = x->left;
+
+    //rotate
+    x->left = n;
+    n->right = t2;
+
+    return x;
+}
+
+node* AVLInsertion(node* root,int val)
+{
+    node* n = new node(val);
+    if(root == NULL)
+        return root;
+    else if(val < root->data)
+        root->left = AVLInsertion(root->left,val);
+    else if(val > root->data)
+        root->right = AVLInsertion(root->right,val);
+    else
+    {
+        cout << "The number already exists." << endl;
+        return root;
+    }
+
+    int bf = GetBalancedFcator(root);
+
+    if(bf > 1 && val < root->left->data)
+        return RightRotation(root);
+    else if(bf < -1 && val> root->right->data)
+        return LeftRotation(root);
+    else if(bf > 1 && val > root->left->data)
+    {
+        root->left = LeftRotation(root->left);
+        return RightRotation(root);
+    }
+    else if(bf < -1 && val < root->right->data)
+    {
+        root->right = RightRotation(root->right);
+        return LeftRotation(root);
+    }
+    return root;    
+        
+}
+
 int main()
 {
     node* root = NULL;
+    node* AVL = NULL;
     
     int option;
     int value;
@@ -368,28 +436,31 @@ int main()
             case 0:
                 break;
             case 1:
+            {
                 int val;
                 cout << "Enter the value to insert into BST: ";
                 cin >> val;
-                InsertNode(root,val);
+                AVL = AVLInsertion(AVL,val);
                 cout << "\n";
                 break;
-            case 2:
-            	{
-            		
-            	cout << "Enter the value to search: ";
-            	cin >> value;
-            	cout << "Iterative search: ";
-            	IterativeSearch(root,value);
-            	cout << "\n";
-            	node* temp = RecursiveSearch(root,value);
-            	if(temp == NULL)
-            		cout << value << " not found in the BST." << endl;
-            	else
-            		cout << value << " found in the BST." << endl;
-            		
-                break;
+
             }
+                
+            case 2:
+            	{	
+            	    cout << "Enter the value to search: ";
+            	    cin >> value;
+            	    cout << "Iterative search: ";
+            	    IterativeSearch(root,value);
+            	    cout << "\n";
+            	    node* temp = RecursiveSearch(root,value);
+            	    if(temp == NULL)
+            		    cout << value << " not found in the BST." << endl;
+            	    else
+            		    cout << value << " found in the BST." << endl;
+            		
+                    break;
+                }
             case 3:
             	{
             		cout << "Enter the value to delete: ";
@@ -403,15 +474,15 @@ int main()
 				}
                 
             case 4:
-                print2D(root,0);
-                cout << "Inorder: ";InOrder(root);
-                cout << "\n";
-                cout << "Preorder: ";PreOrder(root);
-                cout << "\n";
-                cout << "Postorder: "; PostOrder(root);
-                cout<< "\n";
-                cout << "Breath First Search: "; BearthFrstSearch(root);
-                cout<< "\n";
+                print2D(AVL,0);
+                // cout << "Inorder: ";InOrder(root);
+                // cout << "\n";
+                // cout << "Preorder: ";PreOrder(root);
+                // cout << "\n";
+                // cout << "Postorder: "; PostOrder(root);
+                // cout<< "\n";
+                // cout << "Breath First Search: "; BearthFrstSearch(root);
+                // cout<< "\n";
                 break;
             case 5:
                 system("cls");
