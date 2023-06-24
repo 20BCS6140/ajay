@@ -571,7 +571,10 @@ int main()
             	
             	
             default:
-                cout << "Enter the proper option.\n";
+                {
+                    cout << "Enter the proper option.\n";
+                    break;
+                }
                 
         }
         
