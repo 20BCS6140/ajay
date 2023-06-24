@@ -342,134 +342,134 @@ void print2D(node* root, int space)
 }
 
 
-int GetBalancedFactor(node* n)
-{
-    if(n == NULL)
-        return -1;
-    else
-        return (height(n->left)-height(n->right));
-}
+// int GetBalancedFactor(node* n)
+// {
+//     if(n == NULL)
+//         return -1;
+//     else
+//         return (height(n->left)-height(n->right));
+// }
 
-node* RightRotation(node* n)
-{
-    node* x = n->left;
-    node* t2 = x->right;
+// node* RightRotation(node* n)
+// {
+//     node* x = n->left;
+//     node* t2 = x->right;
 
-    //rotate
-    x->right = n;
-    n->left = t2;
-    return x;
-}
+//     //rotate
+//     x->right = n;
+//     n->left = t2;
+//     return x;
+// }
 
-node* LeftRotation(node* n)
-{
-    node* x = n->right;
-    node* t2 = x->left;
+// node* LeftRotation(node* n)
+// {
+//     node* x = n->right;
+//     node* t2 = x->left;
 
-    //rotate
-    x->left = n;
-    n->right = t2;
+//     //rotate
+//     x->left = n;
+//     n->right = t2;
 
-    return x;
-}
+//     return x;
+// }
 
-node* AVLInsertion(node* &root,int val)
-{
-    node* n = new node(val);
-    if(root == NULL)
-    {
-    	root = n;
-    	return root;
-	}
+// node* AVLInsertion(node* &root,int val)
+// {
+//     node* n = new node(val);
+//     if(root == NULL)
+//     {
+//     	root = n;
+//     	return root;
+// 	}
         
-    else if(val < root->data)
-        root->left = AVLInsertion(root->left,val);
-    else if(val > root->data)
-        root->right = AVLInsertion(root->right,val);
-    else
-    {
-        cout << "The number already exists." << endl;
-        return root;
-    }
+//     else if(val < root->data)
+//         root->left = AVLInsertion(root->left,val);
+//     else if(val > root->data)
+//         root->right = AVLInsertion(root->right,val);
+//     else
+//     {
+//         cout << "The number already exists." << endl;
+//         return root;
+//     }
 
-    int bf = GetBalancedFactor(root);
+//     int bf = GetBalancedFactor(root);
 
-    if(bf > 1 && val < root->left->data)
-        return RightRotation(root);
-    else if(bf < -1 && val> root->right->data)
-        return LeftRotation(root);
-    else if(bf > 1 && val > root->left->data)
-    {
-        root->left = LeftRotation(root->left);
-        return RightRotation(root);
-    }
-    else if(bf < -1 && val < root->right->data)
-    {
-        root->right = RightRotation(root->right);
-        return LeftRotation(root);
-    }
-    return root;    
+//     if(bf > 1 && val < root->left->data)
+//         return RightRotation(root);
+//     else if(bf < -1 && val> root->right->data)
+//         return LeftRotation(root);
+//     else if(bf > 1 && val > root->left->data)
+//     {
+//         root->left = LeftRotation(root->left);
+//         return RightRotation(root);
+//     }
+//     else if(bf < -1 && val < root->right->data)
+//     {
+//         root->right = RightRotation(root->right);
+//         return LeftRotation(root);
+//     }
+//     return root;    
         
-}
+// }
 
 
-node* AVLdeletion(node* &root, int val)
-{
-    if(root == NULL)
-        return root;
-    else if(val < root->data)
-    {
-        root->left = AVLdeletion(root->left,val);
-    }
-    else if(val > root->data)
-    {
-        root->right = AVLdeletion(root->right,val);
-    }
-    else
-    {
-        if(root->left == NULL)
-        {
-            node* temp = root->right;
-            delete root;
-            return temp;
-        }
-        else if(root->right == NULL)
-        {
-            node* temp = root->left;
-            delete root;
-            return temp;
+// node* AVLdeletion(node* &root, int val)
+// {
+//     if(root == NULL)
+//         return root;
+//     else if(val < root->data)
+//     {
+//         root->left = AVLdeletion(root->left,val);
+//     }
+//     else if(val > root->data)
+//     {
+//         root->right = AVLdeletion(root->right,val);
+//     }
+//     else
+//     {
+//         if(root->left == NULL)
+//         {
+//             node* temp = root->right;
+//             delete root;
+//             return temp;
+//         }
+//         else if(root->right == NULL)
+//         {
+//             node* temp = root->left;
+//             delete root;
+//             return temp;
 
-        }
-        else
-        {
-            node* temp = minnodevalueatright(root->right);
-            root->data = temp->data;
-            root->right = AVLdeletion(root->right,temp->data);
-        }
-    }
+//         }
+//         else
+//         {
+//             node* temp = minnodevalueatright(root->right);
+//             root->data = temp->data;
+//             root->right = AVLdeletion(root->right,temp->data);
+//         }
+//     }
     
-    int bf = GetBalancedFactor(root);
+//     int bf = GetBalancedFactor(root);
     
-    if(bf > 1 && GetBalancedFactor(root->left) >= 0)
-    {
-        return RightRotation(root);
-    }
-    else if(bf > 1 && GetBalancedFactor(root->left) < 0)
-    {
-        root->left = LeftRotation(root->left);
-        return RightRotation(root);
-    }
-    else if(bf < -1 && GetBalancedFactor(root->right) <= 0)
-    {
-        return LeftRotation(root);
-    }
-    else if(bf < -1 && GetBalancedFactor(root->right) > 0)
-    {
-        root->right = RightRotation(root->right);
-        return LeftRotation(root);
-    }
-    return root;
-}
+//     if(bf > 1 && GetBalancedFactor(root->left) >= 0)
+//     {
+//         return RightRotation(root);
+//     }
+//     else if(bf > 1 && GetBalancedFactor(root->left) < 0)
+//     {
+//         root->left = LeftRotation(root->left);
+//         return RightRotation(root);
+//     }
+//     else if(bf < -1 && GetBalancedFactor(root->right) <= 0)
+//     {
+//         return LeftRotation(root);
+//     }
+//     else if(bf < -1 && GetBalancedFactor(root->right) > 0)
+//     {
+//         root->right = RightRotation(root->right);
+//         return LeftRotation(root);
+//     }
+//     return root;
+// }
 
 int main()
 {
@@ -529,22 +529,17 @@ int main()
             	{
             		cout << "Enter the value to delete: ";
             		cin >> deleteelement;
-            		// node* deletednode = deletenode(root, deleteelement);
-            		// if(deletednode == NULL)
-            		// 	cout << "Element not there in the BST" << endl;
-            		// else
-            		// 	cout << "Eelement deleted." << endl;
-
-                    node* deletenode = AVLdeletion(AVL, deleteelement);
-            		if(deletenode == NULL)
+            		node* deletednode = deletenode(root, deleteelement);
+            		if(deletednode == NULL)
             			cout << "Element not there in the BST" << endl;
             		else
             			cout << "Eelement deleted." << endl;
+
             		break;
 				}
                 
             case 4:
-                print2D(AVL,0);
+                print2D(root,0);
                 cout << "Inorder: ";InOrder(root);
                 cout << "\n";
                 cout << "Preorder: ";PreOrder(root);
