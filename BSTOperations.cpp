@@ -278,6 +278,7 @@ node* minnodevalueatright(node* root)
 	{
 		current = current->left;
 	}
+
 	return current;
 }
 
@@ -315,7 +316,7 @@ node* deletenode(node* root, int val)
 		{
 			node* temp = minnodevalueatright(root->right);
 			root->data = temp->data;
-			root->left = deletenode(root->left,temp->data);
+			root->right = deletenode(root->right,temp->data);
 		}
 	}
 	return root;
