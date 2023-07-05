@@ -28,7 +28,6 @@ int main()
 
     obj.display();
 
-    T1 ajay ="Ajay";
-    cout << ajay << endl;
+
 
 }
