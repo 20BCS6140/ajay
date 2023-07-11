@@ -134,6 +134,55 @@ class Minheap
             return;
 
         }
+
+        void heapify(int i)
+        {
+            int l = left_node(i);
+            int r = right_node(i);
+
+            int smallest = i;
+
+            if(l < heap_size && heap_arr[i] > heap_arr[l])
+                smallest = l;
+            if(r < heap_size && heap_arr[r] < heap_arr[smallest])
+                smallest = r;
+            
+            if(smallest != i)
+            {
+                swap(heap_arr[i], heap_arr[smallest]);
+                heapify(smallest);
+            }
+
+        }
+
+
+        int ExtractMin()
+        {
+            if (heap_size <= 0) return INT_MAX;
+
+            if (heap_size == 1)
+            {
+                heap_size--;
+                return heap_arr[0];
+            }
+
+
+            int root = heap_arr[0];
+            heap_arr[0] = heap_arr[heap_size-1];
+            heap_size--;
+            heapify(0);
+            return root;
+        }
+
+        int getMinofHeap()
+        {
+            if(heap_size <= 0)
+                return INT_MAX;
+            else
+                return heap_arr[0];
+        }
+
+
 };
 
 int main()
@@ -191,10 +240,29 @@ int main()
             }
             case 4:
             {
+                int minimumvalue = heap.getMinofHeap();
+                if(minimumvalue == INT_MAX)
+                {
+                    cout << "Heap is empty" << endl;
+                }
+                else
+                {
+                    cout << "The minimum value of heap: " << minimumvalue << endl;
+                }
                 break;
             }
             case 5:
             {
+                int minimumvalue = heap.ExtractMin();
+                if(minimumvalue == INT_MAX)
+                {
+                    cout << "Heap is empty" << endl;
+                }
+                else
+                {
+                    cout << "The minimum value of heap: " << minimumvalue << endl;
+                    heap.print();
+                }
                 break;
             }
             case 6:
@@ -213,6 +281,8 @@ int main()
                 system("cls");
                 break;
             }
+            case 0:
+                exit(0);
             default:
             {
                 cout << "Enter a proper option." << endl;
