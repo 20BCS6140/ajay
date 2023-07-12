@@ -182,6 +182,44 @@ class Minheap
                 return heap_arr[0];
         }
 
+        int getindex(int element)
+        {
+            for(int i = 0; i < heap_size; i++)
+            {
+                if(element == heap_arr[i])
+                {
+                    return i;
+                }
+            }
+
+            return -1;
+        }
+
+
+        void DeleteKey(int index, int new_val)
+        {
+            if(index == -1)
+            {
+                cout << "Element is not there in the heap." << endl;
+                return;
+            }
+            decrease_key(index,new_val);
+            ExtractMin();
+            cout << "Element deleted successfully!" << endl;
+            return;
+        }
+
+        void decrease_key(int i, int val)
+        {
+            heap_arr[i] = val;
+
+            while(i != 0 && heap_arr[i] < heap_arr[parent(i)])
+            {
+                swap(heap_arr[i], heap_arr[parent(i)]);
+                i = parent(i);
+            }
+        }
+
 
 };
 
@@ -236,6 +274,9 @@ int main()
             }
             case 3:
             {
+                cout << "Enter an element to delete: ";
+                cin >> val;
+                heap.DeleteKey(heap.getindex(val),INT_MIN);
                 break;
             }
             case 4:
