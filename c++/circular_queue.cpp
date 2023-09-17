@@ -8,6 +8,7 @@ class Queue
 {
 private:
     int rear;
+    int itemcount;
     int front;
     int size;
 
@@ -16,6 +17,7 @@ private:
 public:
     Queue(int n) : size{n}
     {
+        itemcount= 0;
         rear = front = -1;
 
         arr = new int[size];
@@ -42,7 +44,7 @@ public:
 
     int count()
     {
-        return rear-front+1;
+        return itemcount;
     }
 
     void enqeue(int val)
@@ -58,6 +60,7 @@ public:
             front = 0;
             arr[rear] = val;
             cout << "Element inserted successfully." << endl;
+            itemcount++;
             return;
         }
         else
@@ -65,6 +68,7 @@ public:
             rear = (rear+1)%size;
             arr[rear] = val;
             cout << "Element inserted successfully." << endl;
+            itemcount++;
             return;
         }
     }
@@ -83,6 +87,7 @@ public:
             arr[front] = 0;
             rear = front = -1;
             cout << "Element removed successfully." << endl;
+            itemcount--;
             return x;
         }
         else
@@ -91,6 +96,7 @@ public:
             arr[front] = 0;
             front = (front+1)%size;
             cout << "Element removed successfully." << endl;
+            itemcount--;
             return x;
         }
     }
