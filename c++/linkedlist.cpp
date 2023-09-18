@@ -43,6 +43,15 @@ void display(node *head)
     return;
 }
 
+
+void insertathead(node* &head, int val)
+{
+    node* n = new node(val);
+
+    n->next = head;
+    head = n;
+}
+
 void insert(node *&head, int val)
 {
     node *n = new node(val);
@@ -147,6 +156,10 @@ int main()
     display(head);
 
     deletenode(head,50);
+    display(head);
+
+    insertathead(head,60);
+    insertathead(head,70); 
     display(head);
 
     return 0;
