@@ -156,6 +156,39 @@ void insertatrandom(node* &head, int val,int pos)
 }
 
 
+void deletenode(node* &head, int val)
+{
+    if(head == NULL)
+        return;
+    else if(head->data == val)
+    {
+        head = head->next;
+        head->prev = NULL;
+        return;
+    }
+
+    node* temp = head;
+
+    while(temp != NULL)
+    {
+        if(temp->next->data == val)
+        {
+            temp->next = temp->next->next;
+            if(temp->next != NULL)
+            {
+                temp->next->prev = temp;
+            }
+            
+            return;
+        }
+        temp = temp->next;
+    }
+
+    cout << "Element not found." << endl;
+
+}
+
+
 
 int main()
 {
@@ -171,5 +204,9 @@ int main()
     cout << count(head) << endl;
     insertatrandom(head,50,1);
     display(head);
+
+    deletenode(head,20);
+    display(head);
+
     return 0;
 }

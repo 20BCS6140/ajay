@@ -120,6 +120,11 @@ void deletenode(node* & head, int val)
     {
         return;
     }
+    else if(head->data == val)
+    {
+        head = head->next;
+        return;
+    }
     else
     {
         node* temp = head;
@@ -155,12 +160,12 @@ int main()
 
     display(head);
 
-    deletenode(head,50);
+    deletenode(head,10);
     display(head);
 
-    insertathead(head,60);
-    insertathead(head,70); 
-    display(head);
+    // insertathead(head,60);
+    // insertathead(head,70); 
+    // display(head);
 
     return 0;
 }
