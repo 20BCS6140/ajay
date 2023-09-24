@@ -21,6 +21,25 @@ int binary_search(int *arr,int l, int r, int key)
     return -1;
 }
 
+int binary_search_iterative(int *arr,int l, int r, int key)
+{
+    while (l <= r)
+    {
+        int mid = l+(r-l)/2;
+
+        if(arr[mid] == key)
+            return mid;
+        else if(arr[mid] < key)
+            l = mid+1;
+        else if(arr[mid] > key)
+            r  = mid-1;
+
+    }
+
+    return -1;
+    
+}
+
 int main()
 {
     int arr_size;
@@ -44,7 +63,7 @@ int main()
     cout << "Enter the element you want to search: ";
     cin >> key;
 
-    int result = binary_search(arr, 0, arr_size,key);
+    int result = binary_search_iterative(arr, 0, arr_size,key);
 
     if(result < 0)
         cout << "Not found." << endl;
