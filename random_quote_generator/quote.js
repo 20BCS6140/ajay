@@ -1,6 +1,8 @@
 const quotetext = document.getElementById("advice");
 const authortext = document.getElementById("authorname");
-btn = document.querySelector("button");
+btn = document.querySelector(".new-quote-button");
+
+const searchauthorBtn = document.querySelector(".search-author");
 
 twitterBtn = document.querySelector(".twitter");
 
@@ -9,6 +11,7 @@ instaBtn = document.querySelector(".instagram");
 soundBtn = document.querySelector(".sound");
 
 const api_url = "https://api.quotable.io/quotes/random";
+// const author_api_url = "https://api.quotable.io/quotes?author=";
 
 async function getquote(url)
 {
@@ -35,7 +38,24 @@ async function getquote(url)
     
 }
 
+ function search_author()
+{
+    const author_input = document.querySelector(".authorsearch").value;
+
+    fetch("https://api.quotable.io/quotes?author=${author_input}").then(res => res.json()).then(result => {
+
+        console.log(result);
+
+    });
+    
+
+}
+
 btn.addEventListener("click",getquote(api_url));
+
+searchauthorBtn.addEventListener("click",search_author);
+
+
 
 twitterBtn.addEventListener("click", () => {
 
@@ -56,6 +76,8 @@ soundBtn.addEventListener("click", () => {
     speechSynthesis.speak(speech);
 
 });
+
+
 
 
 

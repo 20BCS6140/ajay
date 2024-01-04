@@ -14,6 +14,13 @@
             <div class="header">
                 Quote of the day
             </div>
+
+            <div class="container search-bar-container">
+                <form action="" class="search-bar">
+                    <input class="authorsearch" type="text" placeholder="Search by authors, tags" name="q">
+                    <button class="search-author"><i class="fa fa-search btn"></i></button>
+                </form>
+            </div>
             <div class="quote-area">
                 <i class="fas fa-quote-left"></i>
                 <p id="advice">Here the quote comes Here the quote comes Here the quote comes Here the quote comes</p>
@@ -32,7 +39,7 @@
                     </ul>
                 </div>
                 <div class="col-md-8 new-button">
-                    <button onclick="getquote(api_url)">New Quote</button>
+                    <button class="new-quote-button" onclick="getquote(api_url)">New Quote</button>
                 </div>
                 
             </div>
