@@ -117,7 +117,7 @@ function search_author()
 
         }
 
-        author_input.reset()
+        author_input.reset();
 
         
 
