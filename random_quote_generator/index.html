@@ -9,18 +9,32 @@
 </head>
 <body>
 
+    <nav class="navbar fixed-top navbar-light">
+            <div class="search-bar-container">
+                
+                    <input class="authorsearch" type="text" placeholder="Search by authors, tags" name="q">
+                    <button class="search-author"><i class="fa fa-search btn"></i></button>
+            </div>
+      </nav>
+
     <div class="container d-flex justify-content-center">
+        
         <div class="quote-box">
             <div class="header">
                 Quote of the day
             </div>
 
-            <div class="container search-bar-container">
-                <!-- <form action="" class="search-bar"> -->
+            <!-- <div class="container search-bar-container">
+                <form action="" class="search-bar">
                     <input class="authorsearch" type="text" placeholder="Search by authors, tags" name="q">
                     <button class="search-author"><i class="fa fa-search btn"></i></button>
-                <!-- </form> -->
-            </div>
+                    <div class="list">
+
+                    </div>
+                 </form> 
+            </div> -->
+
+            
             <div class="quote-area">
                 <i class="fas fa-quote-left"></i>
                 <p id="advice">Here the quote comes Here the quote comes Here the quote comes Here the quote comes</p>
@@ -28,22 +42,27 @@
             </div>
             <div class="author">
                 <span>__</span>
+                <!-- <form action="test.html" method="get" target="_blank">
+                <button type="submit" id="author_name"><span class="name" id="authorname">Name</span></button>
+                </form> -->
+
                 <span class="name" id="authorname">Name</span>
             </div>
             <div class="row buttons">
-                <div class="col-md-4 features">
-                    <ul class="row justify-content-start">
-                        <li class="sound col"><i class="fas fa-volume-up"></i></li>
-                        <li class="twitter col"><i class="fab fa-twitter"></i></li>
-                        <li class="instagram col"><i class="fab fa-instagram"></i></li>
+                <div class="col-md-8 features justify-content-start">
+                    <ul class="col-md-8 features row justify-content-start align-items-center">
+                        <li class="sound col-1 col-md-4"><i class="fas fa-volume-up"></i></li>
+                        <li class="twitter col-1 col-md-4"><i class="fab fa-twitter"></i></li>
+                        <li class="instagram col-1 col-md-4"><i class="fab fa-instagram"></i></li>
                     </ul>
                 </div>
-                <div class="col-md-8 new-button">
+                <div class="col-md-4 new-button">
                     <button class="new-quote-button">New Quote</button>
                 </div>
                 
             </div>
         </div>
+        <!-- <div class="attempt"></div> -->
     </div>
     
 
