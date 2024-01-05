@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
 const quotetext = document.getElementById("advice");
 const authortext = document.getElementById("authorname");
 btn = document.querySelector(".new-quote-button");
+const element = document.querySelector(".quote-table");
 
 let randomauthorname ="";  //-------------------------raja shekar's
 
@@ -18,8 +19,7 @@ instaBtn = document.querySelector(".instagram");
 
 soundBtn = document.querySelector(".sound");
 
-// const api_url = "https://api.quotable.io/quotes/random";
-// const author_api_url = "https://api.quotable.io/quotes?author=";
+
 
 function getquote()
 {
@@ -47,26 +47,79 @@ function getquote()
     
 }
 
- function search_author()
+function search_author()
 {
     const author_input = document.querySelector(".authorsearch").value;
 
-    urli = "https://api.quotable.io/quotes?author="+author_input;
 
     fetch("https://api.quotable.io/quotes?author="+author_input)
     .then(response => response.json())
     .then(data => {
 
-        if(data.results.length < 0 || author_input == "")
+        console.log("ajay");
+
+        if(Object.keys(data.results).length === 0 || author_input === "")
         {
             
             console.log("No Author Found");
+            let table_data = `<table class="table">
+            <thead>
+              <tr>
+                <th scope="col">No.</th>
+                <th scope="col">Quote</th>
+                <th scope="col">Tag</th>
+                <th scope="col">Date</th>
+              </tr>
+            </thead>
+            <tbody id="table-data">
+            <tr> <th colspan=4 style="text-align:center"> No Data found </th> </tr>
+            </tbody>
+          </table>`;
+            console.log(table_data);
+            document.getElementById("table-data").innerHTML = table_data;
+
+
         }
         else{
-            console.log(data);   
+            console.log(data.results);   
+
+            let table_data = `<table class="table">
+            <thead>
+              <tr>
+                <th scope="col">No.</th>
+                <th scope="col">Quote</th>
+                <th scope="col">Tag</th>
+                <th scope="col">Date</th>
+              </tr>
+            </thead>
+            <tbody id="table-data">`;
+            let i = 1;
+
+            data.results.map((value) => {
+
+                table_data += 
+                `
+                <tr>
+                <th scope="row"> ${i++} </th>
+                <td>${value.content}</td>
+                <td>${value.tags}</td>
+                <td id="quote-date">${value.dateAdded}</td>
+                </tr>`
+
+            });
+
+            table_data+=`
+                        </tbody>
+                    </table>`
+
+            // console.log(table_data + "Ajay");
+            document.getElementById("table-data").innerHTML = table_data;
+
         }
-        // quotetext.innerText = data.results[0].content;
-        // authortext.innerText = data.results[0].author;
+
+        author_input.reset();
+
+        
 
 
     });
@@ -82,41 +135,87 @@ function getquote()
 
 // ---------------------------Raja shekars--------------------------------------
 
-const showspecificauthor = document.getElementById("author_name");
-showtext = document.querySelector(".para");
+const showspecificauthor = document.getElementById("authorname");
+
 
 
 async function getauthor()
 {
-    // alert("hII");
-
+    
     fetch("https://api.quotable.io/quotes?author="+randomauthorname)
     .then(response => response.json())
     .then(data => {
 
-        console.log(randomauthorname);
-        // console.log(data);
-        let text ="";
-        for(let i = 0; i < data.results.length;i++)
+        // console.log("ajay");
+
+        if(Object.keys(data.results).length === 0 || randomauthorname === "")
         {
-            // console.log(data.results[i].content);
-            text += `<p>${data.results[i].content}<br> <p>` ;
+            
+            console.log("No Author Found");
+            let table_data = `<table class="table">
+            <thead>
+              <tr>
+                <th scope="col">No.</th>
+                <th scope="col">Quote</th>
+                <th scope="col">Tag</th>
+                <th scope="col">Date</th>
+              </tr>
+            </thead>
+            <tbody id="table-data">
+            <tr> <th colspan=4 style="text-align:center"> No Data found </th> </tr>
+            </tbody>
+          </table>`;
+            console.log(table_data);
+            document.getElementById("table-data").innerHTML = table_data;
+
 
         }
+        else{
+            console.log(data.results);   
 
-        console.log(text);
-        showtext.innerText = text;
+            let table_data = `<table class="table">
+            <thead>
+              <tr>
+                <th scope="col">No.</th>
+                <th scope="col">Quote</th>
+                <th scope="col">Tag</th>
+                <th scope="col">Date</th>
+              </tr>
+            </thead>
+            <tbody id="table-data">`;
+            let i = 1;
+
+            data.results.map((value) => {
+
+                table_data += `
+                <tr>
+                <th scope="row"> ${i++} </th>
+                <td>${value.content}</td>
+                <td>${value.tags}</td>
+                <td id="quote-date">${value.dateAdded}</td>
+                </tr>`
+                
+
+            });
+
+            table_data+=`
+                        </tbody>
+                    </table>`
+
+            // console.log(table_data + "Ajay");
+            document.getElementById("table-data").innerHTML = table_data;
+
+        }
 
         
 
 
     });
-
 }
 
-// showspecificauthor.addEventListener("click",getauthor, () => {
-//     window.open("test.html","_blank");
-// });
+showspecificauthor.addEventListener("click", function() {
+    getauthor();
+});
 
 
 //--------------------------Raja Sekhar's-----------------------------------
@@ -127,7 +226,17 @@ async function getauthor()
 
 btn.addEventListener("click",getquote);
 
-searchauthorBtn.addEventListener("click",search_author);
+searchauthorBtn.addEventListener("click", function() {
+
+    
+    console.log(element.classList.contains("active"));
+    if(element.classList.contains("active"))
+    {
+        search_author();
+    }
+
+
+});
 
 
 
