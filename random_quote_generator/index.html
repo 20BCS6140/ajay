@@ -11,8 +11,8 @@
 
     <nav class="navbar fixed-top">
             <div class="search-bar-container">
-                    <input class="authorsearch" type="text" placeholder="Search by authors, tags" name="q" onfocus="this.value=''">
-                    <button class="search-author"><i class="fa fa-search btn"></i></button>
+                    <input class="authorsearch" id="authorsearch" type="text" placeholder="Search by authors, tags" name="q"  onfocus="this.value=''">
+                    <button class="search-author" ><i class="fa fa-search btn"></i></button>
             </div>
       </nav>
 
@@ -30,8 +30,9 @@
             </div>
             <div class="author">
                 <span>__</span>
+                  <button style="outline: none; border: none; background: transparent;" class="author_name"><span class="name" id="authorname">Name</span></button>
 
-                <button style="outline: none; border: none; background: transparent;" class="author_name"><span class="name" id="authorname">Name</span></button>
+
             </div>
             <div class="row buttons">
                 <div class="col-md-8 features justify-content-start">
@@ -48,8 +49,36 @@
             </div>
         </div>
 
+
         <div class="quote-table active">
-            <table class="table" id="table-data">
+          <table class="table table-bordered">
+              <tbody id="author_details_table">
+                <!-- <tr>
+                  <th>Name</th>
+                    <td></td>
+                </tr>
+                <tr>
+                  <th>Biography</th>
+                  <td></td>
+                </tr>
+                <tr>
+                  <th>Description</th>
+                  <td></td>
+                </tr>
+                <tr>
+                  <th>Link</th>
+                  <td></td>
+                </tr>
+                <tr>
+                  <th>Slug</th>
+                  <td></td>
+                </tr> -->
+              </tbody>
+            </table> 
+      </div>
+
+      <div class="quote-table active ">
+        <table class="table  table-bordered" id="table-data">
                 <!-- <thead>
                   <tr>
                     <th scope="col">No.</th>
@@ -78,7 +107,39 @@
                   </tr> -->
                 <!-- </tbody>
               </table> -->
-        </div>
+      </div>
+
+      <div class="quote-table active ">
+        <table class="table  table-bordered" id="quotes-by-tags">
+                <!-- <thead>
+                  <tr>
+                    <th scope="col">No.</th>
+                    <th scope="col">Quote</th>
+                    <th scope="col">Tag</th>
+                    <th scope="col">Date</th>
+                  </tr>
+                </thead>
+                <tbody id="table-data"> -->
+                  <!-- <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">3</th>
+                    <td colspan="2">Larry the Bird</td>
+                    <td>@twitter</td>
+                  </tr> -->
+                <!-- </tbody>
+              </table> -->
+      </div>
 
         
 

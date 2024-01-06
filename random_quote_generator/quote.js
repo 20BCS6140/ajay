@@ -47,14 +47,88 @@ function getquote()
     
 }
 
+
+function get_author_details(authorname)
+{
+  
+
+  fetch("https://api.quotable.io/authors?name="+authorname)
+  .then(response => response.json())
+  .then(data => {
+
+    console.log(data);
+
+    if(Object.keys(data.results).length === 0)
+    {
+      console.log("No Athor Found.");
+      let author_data = `<tr>
+                          <th>Name</th>
+                          <td>NA</td>
+                        </tr>
+                        <tr>
+                          <th>Biography</th>
+                          <td>NA</td>
+                        </tr>
+                        <tr>
+                          <th>Description</th>
+                          <td>NA</td>
+                        </tr>
+                        <tr>
+                          <th>Link</th>
+                          <td>NA</td>
+                        </tr>
+                        <tr>
+                          <th>Slug</th>
+                          <td>NA</td>
+                        </tr>`;
+        console.log(author_data);
+        document.getElementById("author_details_table").innerHTML = author_data;
+    }
+    else
+    {
+      let author_data = `<tr>
+                          <th>Name</th>
+                          <td>${data.results[0].name}</td>
+                        </tr>
+                        <tr>
+                          <th>Biography</th>
+                          <td>${data.results[0].bio}</td>
+                        </tr>
+                        <tr>
+                          <th>Description</th>
+                          <td>${data.results[0].description}</td>
+                        </tr>
+                        <tr>
+                          <th>Link</th>
+                          <td><a href="${data.results[0].link}" target="_blank">Website</a></td>
+                        </tr>
+                        <tr>
+                          <th>Slug</th>
+                          <td>${data.results[0].slug}</td>
+                        </tr>`;
+
+          console.log(author_data);
+          document.getElementById("author_details_table").innerHTML = author_data;
+    }
+
+
+  });
+
+}
+
 function search_author()
 {
     const author_input = document.querySelector(".authorsearch").value;
+
+    get_author_details(author_input);
 
 
     fetch("https://api.quotable.io/quotes?author="+author_input)
     .then(response => response.json())
     .then(data => {
+
+      quotetext.innerText = data.results[0].content;
+      authortext.innerText = data.results[0].author;
 
         console.log("ajay");
 
@@ -133,14 +207,23 @@ function search_author()
 
 
 
+
+
+
+
+
+
 // ---------------------------Raja shekars--------------------------------------
 
 const showspecificauthor = document.getElementById("authorname");
 
 
 
-async function getauthor()
+async function getauthorbybutton() //by button
 {
+
+
+  get_author_details(randomauthorname);
     
     fetch("https://api.quotable.io/quotes?author="+randomauthorname)
     .then(response => response.json())
@@ -193,7 +276,7 @@ async function getauthor()
                 <td>${value.content}</td>
                 <td>${value.tags}</td>
                 <td id="quote-date">${value.dateAdded}</td>
-                </tr>`
+                </tr>`;
                 
 
             });
@@ -214,7 +297,7 @@ async function getauthor()
 }
 
 showspecificauthor.addEventListener("click", function() {
-    getauthor();
+    getauthorbybutton();
 });
 
 
