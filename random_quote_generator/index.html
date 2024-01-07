@@ -11,10 +11,10 @@
 
     <nav class="navbar fixed-top">
             <div class="search-bar-container">
-                    <input class="authorsearch" id="authorsearch" type="text" placeholder="Search by authors, tags" name="q"  onfocus="this.value=''">
-                    <button class="search-author" ><i class="fa fa-search btn"></i></button>
+                    <input class="author_search" id="authorsearch" type="text" placeholder="Search by authors, tags" name="q"  onfocus="this.value=''">
+                    <button class="search-author" id="search_tag"><i class="fa fa-search btn"></i></button>
             </div>
-      </nav>
+    </nav>
 
     <div class="container justify-content-center">
         
@@ -77,7 +77,7 @@
             </table> 
       </div>
 
-      <div class="quote-table active ">
+      <div class="quote-table tag-table active ">
         <table class="table  table-bordered" id="table-data">
                 <!-- <thead>
                   <tr>
@@ -109,8 +109,8 @@
               </table> -->
       </div>
 
-      <div class="quote-table active ">
-        <table class="table  table-bordered" id="quotes-by-tags">
+      <div class="quote-table active tags-table" id="quotes-by-tags">
+        <!-- <table class="table  table-bordered" id="quotes-by-tags"> -->
                 <!-- <thead>
                   <tr>
                     <th scope="col">No.</th>

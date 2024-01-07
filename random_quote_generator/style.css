@@ -25,9 +25,9 @@ body
 {
     align-items: center;
     justify-content: center;
-    background-color: #FFFFFF;
+    /* background-color: black; */
     max-height: 80px;
-    /* background: transparent; */
+    background: transparent;
     
 
 }
@@ -147,7 +147,8 @@ input::placeholder
 {  
     background-color: #9E4244;
     /* background-image: linear-gradient(120deg, #9e4244 0%, #ebebeb 100%); */
-    width: 650px;
+    max-width: 650px;
+    width: 100%;
     border-radius: 15px;
     margin-top: 150px;
     padding: 30px;
